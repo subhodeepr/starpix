@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarPix", "StarPix\StarPix.csproj", "{DE6BA65D-DF78-43D9-B0A8-526FEB11F667}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE6BA65D-DF78-43D9-B0A8-526FEB11F667}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE6BA65D-DF78-43D9-B0A8-526FEB11F667}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE6BA65D-DF78-43D9-B0A8-526FEB11F667}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE6BA65D-DF78-43D9-B0A8-526FEB11F667}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,14 @@
+﻿<Window x:Class="StarPix.FacebookUploadProgress"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Upload photos to Facebook" Height="300" Width="471" ContentRendered="Window_ContentRendered" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Icon="images/star.ico">
+    <Grid>
+        <Grid HorizontalAlignment="Left" Width="466" Margin="0,30,0,76.5">
+            <Label Content="Uploading Photos..." Margin="95,0,94,0" VerticalAlignment="Top" FontSize="30"/>
+            <ProgressBar Margin="38,100,38,38" Minimum="0" Maximum="100" x:Name="importStatus"/>
+            <TextBlock Text="{Binding Value, ElementName=importStatus, StringFormat=\{0:0\}%}" Margin="213,99,213,41.5" Height="24" TextAlignment="Center" />
+        </Grid>
+        <Button x:Name="cancelUpload" Content="Cancel" Margin="195,216,196,0" VerticalAlignment="Top" Click="cancelUpload_Click"/>
+
+    </Grid>
+</Window>

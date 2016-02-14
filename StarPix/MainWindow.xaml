@@ -1,0 +1,105 @@
+﻿<Window x:Class="StarPix.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="StarPix" Height="768" Width="900
+        " ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" MouseDown="mainWindowGrid_MouseDown" Icon="images/star.ico">
+    <Grid>
+        <Canvas
+            x:Name="dragSelectionCanvas"
+            Visibility="Collapsed"
+            >
+            <Border 
+                x:Name="dragSelectionBorder"
+                BorderBrush="Blue"
+                BorderThickness="1"
+                Background="LightBlue"
+                CornerRadius="1"
+                Opacity="0.5"
+                />
+        </Canvas>
+        <Menu HorizontalAlignment="Left" Height="25" Margin="57,0,0,0" VerticalAlignment="Top" Width="120">
+            <MenuItem x:Name="manageLibrary" FontSize="14" Header="Manage Library" VerticalContentAlignment="Center" FontFamily="Segoe UI Symbol" Height="25" Width="120">
+                <MenuItem x:Name="importPhotos" Header="Import Photos" Click="importPhotos_Click" ToolTip="Import photos from the latest image source"/>
+                <MenuItem x:Name="manageCollections" Header="Manage Collections" Click="manageCollections_Click" ToolTip="Add, rename, and delete collections"/>
+            </MenuItem>
+        </Menu>
+
+        <StatusBar x:Name="statusBar" Height="32" Margin="0,708,0,-1" VerticalAlignment="Top">
+            <StatusBarItem x:Name="statusTextWrapper" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <TextBlock x:Name="photoStatus" FontStyle="Italic" FontSize="13" FontWeight="Light" Width="561" Height="33"/>
+            </StatusBarItem>
+            <StatusBarItem x:Name="photoSizeSliderWrapper" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <Slider x:Name="photoSizeSlider" Width="94" Value="10" IsSnapToTickEnabled="True" Minimum="0" Maximum="10" TickFrequency="5" ValueChanged="photoSizeSlider_ValueChanged" ToolTip="Drag left to decrease image size, right to increase image size"/>
+            </StatusBarItem>
+        </StatusBar>
+        <TextBox x:Name="searchBar" HorizontalAlignment="Left" Height="25" Margin="202,0,0,0" Text="Search photos by tags" VerticalAlignment="Top" Width="566" VerticalContentAlignment="Center" FontStyle="Italic" Foreground="Gray" GotFocus="searchBar_GotFocus" LostFocus="searchBar_LostFocus" SpellCheck.IsEnabled="True" Padding="0,0,20,0" KeyDown="searchBar_KeyDown"/>
+        <Image HorizontalAlignment="Left" Height="15" Margin="744,6,0,0" VerticalAlignment="Top" Width="17" Source="images/magnifyingglass.png"/>
+        <Grid HorizontalAlignment="Left" Height="29" Margin="40,46,0,0" VerticalAlignment="Top" Width="787">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="19*"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="successLabel" Margin="129,0,70,0" VerticalAlignment="Top" HorizontalContentAlignment="Center"  Visibility="Collapsed" Foreground="#FF0E9539" Height="29" Grid.RowSpan="2">
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Style.Triggers>
+                            <Trigger Property="Visibility" Value="Visible">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:01" BeginTime="00:00:00" From="0.0" To="1.0" />
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:01" BeginTime="00:00:04" From="1.0" To="0.0" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+            <Menu x:Name="sort" Height="Auto" Margin="741,3,0,0" VerticalAlignment="Top" Grid.RowSpan="2">
+                <MenuItem Header="Sort" Height="20" Width="46" HorizontalAlignment="Center" HorizontalContentAlignment="Center" ToolTip="Select a sorting option for the current view" >
+                    <RadioButton x:Name="sortByDate" Content="By Date" GroupName="Sort" IsChecked="True" Click="sortByDate_Click"/>
+                    <RadioButton x:Name="sortByFileType" Content="By File Type" GroupName="Sort" Click="sortByFileType_Click"/>
+                    <RadioButton x:Name="sortByName" Content="By Name" GroupName="Sort" Click="sortByName_Click"/>
+                    <Separator/>
+                    <RadioButton x:Name="sortAscending" Content="Ascending" GroupName="By" IsChecked="True" Click="sortAscending_Click"/>
+                    <RadioButton x:Name="sortDescending" Content="Descending" GroupName="By" Click="sortDescending_Click"/>
+                </MenuItem>
+            </Menu>
+            <Menu x:Name="collectionsMenu" HorizontalAlignment="Left" Height="Auto" Margin="19,3,0,0" VerticalAlignment="Top" Width="81" Grid.RowSpan="2">
+                <MenuItem x:Name="collectionsList" Header="Collections" Height="20" Width="82" ToolTip="Select a collection to view">
+                    <RadioButton Content="All Photos" IsChecked="True" Checked="RadioButton_Checked_1"/>
+                </MenuItem>
+            </Menu>
+        </Grid>
+
+        <Grid HorizontalAlignment="Left" Height="25" Margin="792,0,0,0" VerticalAlignment="Top" Width="64">
+            <Button Background="Transparent" HorizontalAlignment="Right" Margin="0,0,30,0" VerticalAlignment="Top" Width="24" Height="25" Click="facebookButton_Click" BorderThickness="0" IsEnabled="{Binding ElementName=_listbox, Path=SelectedItems.Count}">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image x:Name="img1" Stretch="Fill" Source="images/facebook_button.png" Margin="0" ToolTip="Upload selected photo(s) to Facebook" ToolTipService.ShowOnDisabled="true"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Source" Value="images/fb-bw2.png" TargetName="img1"></Setter>
+                                <Setter Property="ToolTipService.ToolTip" Value="Please select photos to use this feature"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+
+        <Image x:Name="trashCan" HorizontalAlignment="Left" Height="38" Margin="838,647,0,0" VerticalAlignment="Top" Width="40" Source="images/trash_recyclebin_empty_closed_w.png" AllowDrop="True" Drop="trashCan_Drop" ToolTip="Drag photos over trash bin to delete">
+        </Image>
+        <ListBox PreviewKeyDown="keyDown" ScrollViewer.VerticalScrollBarVisibility="Visible" Name="_listbox" SelectionMode="Extended" Height="591" Margin="57,94,58,0" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#FFE0DEDE" BorderThickness="0" BorderBrush="#FFC4CD11" PreviewMouseLeftButtonDown="_listbox_PreviewMouseLeftButtonDown">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+        <Label x:Name="noEntryLabel" Visibility="Collapsed" FontSize="18" Content="No photos found with that search" Margin="308,353,220,311"/>
+        <Label x:Name="noPhotosLabel" Visibility="Collapsed" FontSize="18" Content="No photos to display" Margin="359,353,300,311"/>
+    </Grid>
+</Window>
