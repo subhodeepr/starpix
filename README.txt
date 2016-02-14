@@ -4,7 +4,7 @@ StarPix - A Photo Management Solution
 Students: Subhodeep Ray-Chaudhuri, Behnam Nikkhah
 =================================================
 
-This application was written using C# programming language and WPF framework.
+This prototype application was written using C# programming language and WPF framework.
 
 Steps:
 ----------------------------------
